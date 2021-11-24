@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Wave Effect</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Open Sans', sans-serif;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        .loaded .ocean{
+            animation: transform_up 3s cubic-bezier(.36,.45,.63,.53);
+            transform: translateY(-100%);
+        }
+        .ocean {
+            overflow: hidden;
+            width: 100%;
+            z-index: 9;
+            position: fixed;
+            right: 0;
+            left: 0;
+            height: calc(100vh + 330px);
+        }
+        .wave {
+            background: url('https://i.imgur.com/mgO35iC.png') repeat-x;
+            position: absolute;
+            bottom: 50px;
+            width: 7680px;
+            height: 100%;
+            animation: wave 1000s cubic-bezier(.36,.45,.63,.53) infinite;
+        }
+        .wave2 {
+            background: url('https://i.imgur.com/mgO35iC.png') repeat-x;
+            position: absolute;
+            bottom: 0px;
+            width: 7680px;
+            height: 100%;
+            animation: wave2 1000s cubic-bezier(.36,.45,.63,.53) infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes wave {
+            0% {
+                background-position: 0;
+            }
+            100%{
+                background-position: -999999px;        
+            }
+        }
+
+        @keyframes wave2 {
+            0% {
+                background-position: 0
+            }
+
+            100% {
+                background-position: 999999px;    
+            }
+        }
+
+        @keyframes transform_up {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        /*menu*/
+        .container{
+            max-width: 1140px;
+            padding: 0 25px;
+            margin: 0 auto;
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;  
+        }
+        a{
+            display: block;
+        }
+        nav{
+            max-width: 850px;
+            position: relative;
+            margin: 0 auto;
+        }
+        nav ul.main-nav li.menu-item span img {
+            max-width: 165px;
+            display: block;
+        }
+        nav ul.main-nav li.menu-item .menu-item-bg{
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding-bottom: 100%;
+            opacity: 0.94;
+            transition: transform 0.3s;
+        }
+        nav ul.main-nav li.menu-item.home.active span{
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+        nav ul.main-nav li.menu-item.active:not(.home) span{
+            transform: translate(-50%, -50%) scale(0.86);
+        }
+        nav ul.main-nav li.menu-item span{
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: transform 0.3s;
+        }
+        nav ul.main-nav li.menu-item.active .menu-item-bg{
+            transform: rotate(120deg) scale(1.15);
+        }
+        nav ul.main-nav li.menu-item.shake .menu-item-bg{
+            animation: shake 0.3s 0.3s cubic-bezier(.36,.45,.63,.53);
+        }
+        nav ul.main-nav li.menu-item{
+            transition: transform 0.3s ease-out;
+            max-width: 20%;
+            flex: 0 0 20%;
+            position: relative;
+            margin-left: -25px;
+        }
+        nav ul.main-nav li.brands {
+            z-index: 1;
+        }
+        nav ul.main-nav li.home {
+            z-index: 2;
+        }
+        nav ul{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-section{
+            padding: 150px 0;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(5deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            75% {
+                transform: rotate(-5deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+
+        /*flip card*/
+        .main-nav {
+            perspective: 800px;
+            width: 100%;
+            height: 100%;
+        }
+        nav ul.main-nav li.flip-card{
+            pointer-events: none;
+            height: 170px;
+            width: 170px;
+            position: absolute;
+            /*transform: scale(0);*/
+        }
+        nav ul.main-nav li.flip-card.card9{
+            background-color: rgba(48, 46, 45, 0.93);   
+            left: 50%;
+        }
+        nav ul.main-nav li.flip-card.card8{
+            background-color: rgba(80, 106, 113, 0.93);   
+            left: 47%;
+        }
+        nav ul.main-nav li.flip-card.card7{
+            background-color: rgba(65, 151, 173, 0.93);  
+            left: 44%;
+        }
+        nav ul.main-nav li.flip-card.card6{
+            background-color: rgba(133, 180, 192, 0.93);
+            left: 41%;
+        }
+        nav ul.main-nav li.flip-card.card5{
+            background-color: rgba(194, 191, 187, 0.93);
+            left: 38%;
+        }
+        nav ul.main-nav li.flip-card.card4{
+            background-color: rgba(185, 130, 91, 0.93);   
+            left: 35%;
+        }
+        nav ul.main-nav li.flip-card.card3{
+            background-color: rgba(203, 112, 46, 0.93);   
+            left: 32%;
+        }
+        nav ul.main-nav li.flip-card.card2{
+            background-color: rgba(203, 150, 76, 0.93);   
+            left: 29%;
+        }
+        nav ul.main-nav li.flip-card.card1{
+            background-color: rgba(181, 172, 71, 0.93);   
+            left: 26%;
+        }
+
+        .loaded1 nav ul.main-nav{
+            opacity: 1;
+        }
+        nav ul.main-nav{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="ocean">
+      <div class="wave"></div>
+      <div class="wave2"></div>
+    </div>
+    <main>
+        <section class="nav-section">
+            <div class="container">
+                <nav>
+                    <ul class="main-nav">
+                        <li class="flip-card card1"></li>
+                        <li class="flip-card card2"></li>
+                        <li class="flip-card card4"></li>
+                        <li class="flip-card card3"></li>
+                        <li class="flip-card card5"></li>
+                        <li class="flip-card card6"></li>
+                        <li class="flip-card card7"></li>
+                        <li class="flip-card card8"></li>
+                        <li class="flip-card card9"></li>
+                        <li class="menu-item studio">
+                            <a href="#">
+                                <div class="menu-item-bg" style="background-image: url('images/nav-bg-dark-gray.png');"></div>
+                                <span>Studio</span>
+                            </a>
+                        </li>
+                        <li class="menu-item work">
+                            <a href="#">
+                                <div class="menu-item-bg" style="background-image: url('images/nav-bg-blue.png');"></div>
+                                <span>Work</span>
+                            </a>
+                        </li>
+                        <li class="menu-item home">
+                            <a href="#">
+                                <div class="menu-item-bg" style="background-image: url('images/nav-bg-light-gray.png');">
+                                </div>
+                                <span><img src="images/ring-tree.png" alt="ring-tree"></span>
+                            </a>
+                        </li>
+                        <li class="menu-item brands">
+                            <a href="#">
+                                <div class="menu-item-bg" style="background-image: url('images/nav-bg-orange.png');">
+                                </div>
+                                <span>Brands</span>
+                            </a>
+                        </li>
+                        <li class="menu-item inquire">
+                            <a href="#">
+                                <div class="menu-item-bg" style="background-image: url('images/nav-bg-yellow.png');">
+                                </div>
+                                <span>Inquire</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+    </main>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/gsap.min.js"></script>
+    <script>
+
+        window.onload = () => {
+          document.getElementsByTagName('body')[0].classList.add('loaded');
+
+            setTimeout(() => {
+                document.getElementsByTagName('body')[0].classList.add('loaded1');
+                // flip card
+                const tl = gsap.timeline();
+                tl.from('li.flip-card', {
+                    left: '100%',
+                    opacity:0,
+                    scale:0,
+                    stagger: 0.09,
+                    duration: 2,
+                })
+                .fromTo('li.flip-card', {
+                    rotationY: 0,
+                    transformOrigin: "left center", 
+                    duration: 2,
+                    stagger: 0.1,
+                }, 
+                {
+                    transformOrigin: "left center", 
+                    rotationY: -90,
+                    duration: 2,
+                    stagger: 0.1,
+                },'<0.5')
+                .to('li.flip-card',{
+                    rotationY:-360,
+                    opacity:0,
+                    scale:0.2,
+                    left: '50%',
+                    xPercent: -50,
+                    stagger: 0.1,
+                    duration: 2,
+                    transformOrigin: "left center", 
+                },'<1.2')
+                .from('.main-nav li.menu-item',{
+                    opacity:0,
+                    marginLeft: '-170px',
+                    stagger: 0.1,
+                    duration: 2,
+                },'<0.5')
+                .to('li.flip-card',{
+                    visibility: 'hidden'
+                })
+            }, 3000);
+        }
+
+        $(function() {
+
+            let circleLeft = 0,
+                circleTop = 0,
+                offset_left = 0,
+                flag = false;
+
+            $('.main-nav li').on('mouseenter',function(){
+                offset_left  = $(this).offset().left;
+                console.log(offset_left);
+                flag = true;
+                $(this).addClass('active');
+                $(this).removeClass('shake');
+            });
+            $('.main-nav li').on('mouseleave',function(){
+                $(this).css({"transform": "translate3d(0,0,0)"});
+                $(this).removeClass('active');
+                $(this).addClass('shake');
+                flag = false;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (flag) {
+                    circleLeft = e.clientX - offset_left - 80;
+                    circleTop = e.clientY - 220;
+                    // console.log(circleLeft);
+                    // console.log(circleTop);
+                }
+            });
+            const mouseMove = () => {
+                $('.main-nav li.active').css({
+                    transform: 'translate3d(' + circleLeft + 'px,' + circleTop +'px, 0px)',
+                });
+
+                if (circleTop <= -85 || circleTop >= 85 || circleLeft <= -85 || circleLeft >= 85) {
+                    $('.main-nav li').css({"transform": "translate3d(0,0,0)"});
+                    $('.main-nav li.active').addClass('shake');
+                    $('.main-nav li.active').removeClass('active');
+                    flag = false;
+                }
+
+                window.requestAnimationFrame(mouseMove);
+            }
+            mouseMove();
+        });
+    </script>
+</body>
+</html>
